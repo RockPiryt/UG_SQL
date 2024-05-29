@@ -1,6 +1,8 @@
+CREATE DATABASE komis_projekt;
+-----------------------------------------------------------------------------
 CREATE TABLE komis 
 (
-    id_komis                int                  PRIMARY KEY,
+    id_komis                serial               PRIMARY KEY,
     nip                     int                  not null,
     nazwa                   varchar(30)          not null,
     panstwo                 varchar(30)          not null,
@@ -9,108 +11,144 @@ CREATE TABLE komis
     nr_budynku              varchar(50)          not null,
     nr_lokalu               varchar(30),
     kod_pocztowy            varchar(30)          not null,
-    telefon                 int,
+    telefon                 varchar(30),
     e_mail                  varchar(30),
-    UNIQUE(id_komis,nip)
+    UNIQUE(nip)
 );
-
+-------------------------------------------------------------------------------
 CREATE TABLE plac 
 (
-    id_plac                 int             PRIMARY KEY,
-    kraj                    varchar(30)     not null,
+    id_plac                 serial          PRIMARY KEY,
+    kraj                    varchar(30)     not null        DEFAULT 'Polska',
     miejscowosc             varchar(30)     not null,
     ulica                   varchar(30)     not null,
-    nr_działki              int             not null,
+    nr_działki              varchar(20)     not null,
     id_komis                int,
     -- klucz obcy - powiazanie placu z komisem
     CONSTRAINT              fk_komis FOREIGN KEY(id_komis)
                             REFERENCES komis(id_komis)
-                            ON UPDATE CASCADE ON DELETE SET NULL
+                            ON UPDATE CASCADE ON DELETE CASCADE
 );
-
+--------------------------------------------------------------------------------
 CREATE TABLE samochod 
 (
-    id_samochod             int             PRIMARY KEY,
-    nr_rejestracyjny        varchar(10),
+    id_samochod             serial          PRIMARY KEY,
+    nr_rejestracyjny        varchar(7),
+    nr_vin                  char(17)     not null,
     marka                   varchar(30)     not null,
     model                   varchar(30)     not null,
     rocznik                 int             not null,
-    przebieg                float           not null,
-    silnik                  float           not null,
+    przebieg                decimal(12,2)   not null,
+    silnik                  decimal(4,2)    not null,
     paliwo                  varchar(30)     not null,
     moc                     int             not null,
     kolor                   varchar(30)     not null,
     rodzaj_pojazdu          varchar(30)     not null,
-    ladownosc               float,
+    ladownosc               decimal(4,2),
     gotowy_do_sprzedaży     bool            not null,
     id_plac                 int,
     -- klucz obcy - powiazanie samocodu z placem
     CONSTRAINT              fk_plac FOREIGN KEY(id_plac)
                             REFERENCES plac(id_plac)
-                            ON UPDATE CASCADE ON DELETE SET NULL
+                            ON UPDATE CASCADE ON DELETE CASCADE,
+    UNIQUE(nr_rejestracyjny, nr_vin)
 );
 
+------------------------------------------------------------------
+CREATE TABLE dostawa
+(
+    id_dostawa            serial                PRIMARY KEY,
+    data_dostawy          date                  not null,
+    kraj_pochodzenia      varchar(50)           not null, 
+    czy_zarejestrowany    bool                  not null,
+    czy_uszkodzony        bool                  not null,
+    id_plac               int,
+    id_samochod           int,
+    -- klucz obcy - powiazanie dostawy z samochodem
+    CONSTRAINT              fk_samochod FOREIGN KEY(id_samochod)
+                            REFERENCES samochod(id_samochod)
+                            ON UPDATE CASCADE ON DELETE CASCADE,
+    -- klucz obcy - powiazanie dostawy z placem
+    CONSTRAINT              fk_plac FOREIGN KEY(id_plac)
+                            REFERENCES plac(id_plac)
+                            ON UPDATE CASCADE ON DELETE CASCADE
+);
 
+-----------------------------------------------------------------------
 CREATE TABLE sprzedawca 
 (
-    id_sprzedawca           int                 PRIMARY KEY,
+    id_sprzedawca           serial              PRIMARY KEY,
     imie                    varchar(30)         not null,
     nazwisko                varchar(30)         not null,
-    nr_telefonu             int,
+    nr_telefonu             varchar(30),
     e_mail                  varchar(50),
     id_komis                int,
-    UNIQUE(id_sprzedawca, id_komis),
+    id_plac                 int,
     -- klucz obcy - powiazanie sprzedawcy z komisem
     CONSTRAINT              fk_komis FOREIGN KEY(id_komis)
                             REFERENCES komis(id_komis)
-                            ON UPDATE CASCADE ON DELETE SET NULL
+                            ON UPDATE CASCADE ON DELETE CASCADE,
+    -- klucz obcy - powiazanie sprzedawcy z placem(są 3 place)
+    CONSTRAINT              fk_plac FOREIGN KEY(id_plac)
+                            REFERENCES plac(id_plac)
+                            ON UPDATE CASCADE ON DELETE CASCADE
 );
-
+------------------------------------------------------------------
 CREATE TABLE faktura
 (
-    id_faktura              int                  PRIMARY KEY,
-    kwota                   float                not null,
-    waluta                  varchar(10)          not null,
-    rabat                   int,
-    sposob_zaplaty          varchar(30),
-    czy_zaplacono           bool
+    id_faktura              serial                  PRIMARY KEY,
+    nr_faktury              varchar(10)             not null
+    kwota                   decimal(12,2)           not null,
+    waluta                  varchar(3)              not null,
+    rabat                   smallint,
+    sposob_zaplaty          varchar(30)             not null,
+    czy_zaplacono           bool                    not null,
+    UNIQUE(nr_faktury)
 );
 
-
+-----------------------------------------------------------------------
 CREATE TABLE kartoteka_zlecen
 (
-    id_transakcja           int                  PRIMARY KEY,
-    rodzaj                  varchar(15)          not null,
-    data_sprzedaży          date                 not null,
-    samochod_w_rozliczeniu  bool,
-    uwagi                   varchar(50),
+    id_transakcja           serial                 PRIMARY KEY,
+    rodzaj                  varchar(15)            not null,
+    data_sprzedaży          date                   not null,
+    samochod_w_rozliczeniu  bool                   not null,
+    uwagi                   text,
     id_samochod             int,
+    id_klient               int,
     id_sprzedawca           int,
+    id_plac
     id_faktura              int,
-    UNIQUE(id_transakcja),
     -- klucz obcy - powiazanie transakcji z zakupionym/sprzedanym samochodem
     CONSTRAINT              fk_samochod FOREIGN KEY(id_samochod)
                             REFERENCES samochod(id_samochod)
-                            ON UPDATE CASCADE ON DELETE SET NULL,
+                            ON UPDATE CASCADE ON DELETE CASCADE,
+    -- klucz obcy - powiazanie transakcji z klientem
+    CONSTRAINT              fk_klient FOREIGN KEY(id_klient)
+                            REFERENCES klient(id_klient)
+                            ON UPDATE CASCADE ON DELETE CASCADE,
+    -- klucz obcy - powiazanie transakcji z placem
+    CONSTRAINT              fk_plac FOREIGN KEY(id_plac)
+                            REFERENCES plac(id_plac)
+                            ON UPDATE CASCADE ON DELETE CASCADE,
     -- klucz obcy - powiazanie transakcji ze sprzedajacym
     CONSTRAINT              fk_sprzedawca FOREIGN KEY(id_sprzedawca)
                             REFERENCES sprzedawca(id_sprzedawca)
-                            ON UPDATE CASCADE ON DELETE SET NULL,
+                            ON UPDATE CASCADE ON DELETE CASCADE,
     -- klucz obcy - powiazanie transakcji z faktura
     CONSTRAINT              fk_faktura FOREIGN KEY(id_faktura)
                             REFERENCES faktura(id_faktura)
-                            ON UPDATE CASCADE ON DELETE SET NULL
+                            ON UPDATE CASCADE ON DELETE CASCADE,
     
 );
 
-
+------------------------------------------------------------------------
 CREATE TABLE klient 
 (
-    id_klient               int                  PRIMARY KEY,
+    id_klient               serial               PRIMARY KEY,
     imie                    varchar(30)          not null,
     nazwisko                varchar(30)          not null,
-    pesel                   int,
-    nip                     int,
+    pesel_nip               int                  not null,
     rodzaj_dokumentu        varchar(50)          not null,
     nr_dokumentu            varchar(30)          not null,
     panstwo                 varchar(30),
@@ -121,13 +159,11 @@ CREATE TABLE klient
     kod                     varchar(10),
     nr_telefonu             int,
     id_transakcja           int,
-    UNIQUE(id_klient,pesel,id_transakcja),
     -- klucz obcy - powiazanie klienta z nr transakcji
     CONSTRAINT              fk_transakcja FOREIGN KEY(id_transakcja)
                             REFERENCES kartoteka_zlecen(id_transakcja)
-                            ON UPDATE CASCADE ON DELETE SET NULL
+                            ON UPDATE CASCADE ON DELETE CASCADE,
+    UNIQUE(pesel_nip)
 );
-
-
 
 
