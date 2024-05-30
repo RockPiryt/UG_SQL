@@ -8,10 +8,10 @@ CREATE TABLE komis
     panstwo                 varchar(30)          not null,
     miasto                  varchar(30)          not null,
     ulica                   varchar(30)          not null,
-    nr_budynku              varchar(50)          not null,
-    nr_lokalu               varchar(30),
-    kod_pocztowy            varchar(30)          not null,
-    telefon                 varchar(30),
+    nr_budynku              int                  not null,
+    nr_lokalu               varchar(10),
+    kod_pocztowy            char(6)              not null,
+    telefon                 varchar(15),
     e_mail                  varchar(30),
     UNIQUE(nip)
 );
@@ -46,6 +46,7 @@ CREATE TABLE samochod
     rodzaj_pojazdu          varchar(30)     not null,
     ladownosc               decimal(4,2),
     gotowy_do_sprzedaży     bool            not null,
+    cena                    decimal(20,2)   not null,
     opis                    text,
     id_plac                 int,
     -- klucz obcy - powiazanie samocodu z placem

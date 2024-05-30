@@ -81,6 +81,8 @@ SELECT
     ROUND(AVG(rabat),2) AS sredni_rabat_procent
 FROM faktura;
 
+---- dodac kwoty do samochodow
+
 --------------WYMAGANIE-----------------Użycie widoku (perspektywy, VIEW).
 --wyświetl tabele faktura z kwotami podanymi w walucie polskiej
 CREATE VIEW kwoty_polskie
