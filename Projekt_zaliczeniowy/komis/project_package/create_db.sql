@@ -46,6 +46,7 @@ CREATE TABLE samochod
     rodzaj_pojazdu          varchar(30)     not null,
     ladownosc               decimal(4,2),
     gotowy_do_sprzedaży     bool            not null,
+    opis                    text,
     id_plac                 int,
     -- klucz obcy - powiazanie samocodu z placem
     CONSTRAINT              fk_plac FOREIGN KEY(id_plac)
@@ -100,6 +101,7 @@ CREATE TABLE faktura
     nr_faktury              varchar(10)             not null,
     kwota                   decimal(12,2)           not null,
     waluta                  varchar(3)              not null,
+    przelicznik_waluty      decimal(6,3)            not null,    
     rabat                   smallint,
     sposob_zaplaty          varchar(30)             not null,
     czy_zaplacono           bool                    not null,
@@ -134,8 +136,8 @@ CREATE TABLE kartoteka_transakcji
     id_samochod             int,
     id_klient               int,
     id_sprzedawca           int,
-    id_plac					 int,
-    id_faktura              int,
+    id_plac					int,
+    id_faktura              int
     -- klucz obcy - powiazanie transakcji z zakupionym/sprzedanym samochodem
     CONSTRAINT              fk_samochod FOREIGN KEY(id_samochod)
                             REFERENCES samochod(id_samochod)
