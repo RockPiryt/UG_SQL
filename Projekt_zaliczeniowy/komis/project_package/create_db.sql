@@ -1,4 +1,4 @@
-CREATE DATABASE komis_projekt;
+--CREATE DATABASE komis_projekt;
 -----------------------------------------------------------------------------
 CREATE TABLE komis 
 (
@@ -97,7 +97,7 @@ CREATE TABLE sprzedawca
 CREATE TABLE faktura
 (
     id_faktura              serial                  PRIMARY KEY,
-    nr_faktury              varchar(10)             not null
+    nr_faktury              varchar(10)             not null,
     kwota                   decimal(12,2)           not null,
     waluta                  varchar(3)              not null,
     rabat                   smallint,
@@ -105,19 +105,36 @@ CREATE TABLE faktura
     czy_zaplacono           bool                    not null,
     UNIQUE(nr_faktury)
 );
-
+------------------------------------------------------------------------
+CREATE TABLE klient 
+(
+    id_klient               serial               PRIMARY KEY,
+    imie                    varchar(30)          not null,
+    nazwisko                varchar(30)          not null,
+    pesel_nip               varchar(11)          not null,
+    rodzaj_dokumentu        varchar(50)          not null,
+    nr_dokumentu            varchar(30)          not null,
+    panstwo                 varchar(30),
+    miasto                  varchar(50),
+    ulica                   varchar(50),
+    nr_domu                 int,
+    nr_mieszkania           varchar(10),
+    kod                     varchar(10),
+    telefon                 varchar(30),
+    UNIQUE(pesel_nip)
+);
 -----------------------------------------------------------------------
-CREATE TABLE kartoteka_zlecen
+CREATE TABLE kartoteka_transakcji
 (
     id_transakcja           serial                 PRIMARY KEY,
     rodzaj                  varchar(15)            not null,
-    data_sprzedaży          date                   not null,
+    data_transakcji         date                   not null,
     samochod_w_rozliczeniu  bool                   not null,
     uwagi                   text,
     id_samochod             int,
     id_klient               int,
     id_sprzedawca           int,
-    id_plac
+    id_plac					 int,
     id_faktura              int,
     -- klucz obcy - powiazanie transakcji z zakupionym/sprzedanym samochodem
     CONSTRAINT              fk_samochod FOREIGN KEY(id_samochod)
@@ -138,32 +155,10 @@ CREATE TABLE kartoteka_zlecen
     -- klucz obcy - powiazanie transakcji z faktura
     CONSTRAINT              fk_faktura FOREIGN KEY(id_faktura)
                             REFERENCES faktura(id_faktura)
-                            ON UPDATE CASCADE ON DELETE CASCADE,
+                            ON UPDATE CASCADE ON DELETE CASCADE
     
 );
 
-------------------------------------------------------------------------
-CREATE TABLE klient 
-(
-    id_klient               serial               PRIMARY KEY,
-    imie                    varchar(30)          not null,
-    nazwisko                varchar(30)          not null,
-    pesel_nip               int                  not null,
-    rodzaj_dokumentu        varchar(50)          not null,
-    nr_dokumentu            varchar(30)          not null,
-    panstwo                 varchar(30),
-    miasto                  varchar(50),
-    ulica                   varchar(50),
-    nr_domu                 int,
-    nr_mieszkania           int,
-    kod                     varchar(10),
-    nr_telefonu             int,
-    id_transakcja           int,
-    -- klucz obcy - powiazanie klienta z nr transakcji
-    CONSTRAINT              fk_transakcja FOREIGN KEY(id_transakcja)
-                            REFERENCES kartoteka_zlecen(id_transakcja)
-                            ON UPDATE CASCADE ON DELETE CASCADE,
-    UNIQUE(pesel_nip)
-);
+
 
 

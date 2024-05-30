@@ -1,5 +1,5 @@
+DROP TABLE kartoteka_transakcji;
 DROP TABLE klient;
-DROP TABLE kartoteka_zlecen;
 DROP TABLE faktura;
 DROP TABLE dostawa;
 DROP TABLE samochod;
