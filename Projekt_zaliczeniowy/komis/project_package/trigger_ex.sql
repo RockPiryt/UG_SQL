@@ -1,22 +1,21 @@
+-----------------------TRIGGER 1 - PRZYKŁAD (historia zmian ceny samochodu )
+--Dodanie nowego samochodu do bazy danych:
+INSERT INTO samochod (nr_rejestracyjny, nr_vin, marka, model, rocznik, przebieg, silnik, paliwo, moc, kolor, rodzaj_pojazdu, ladownosc, gotowy_do_sprzedaży, cena, opis, id_plac)
+VALUES ('ABC1234', '1HGBH41JXMN109186', 'Toyota', 'Camry', 2020, 15000.00, 2.5, 'Benzyna', 178, 'Biały', 'Sedan', 1.50, TRUE, 85000.00, 'Samochód w bardzo dobrym stanie', 1);
 
---Przykładowe wywołanie dla tabeli faktura:
+--Aktualizacja ceny samochodu:
+UPDATE samochod
+SET cena = 80000.00
+WHERE id_samochod = 16;
 
---Wstawienie nowej faktury, które uruchomi trigger before_insert_faktura 
---i automatycznie obliczy kwotę po uwzględnieniu rabatu:
+--Weryfikacja zmian cen w tabeli historia_cen
+SELECT * FROM historia_cen
+WHERE id_samochod = 16;
 
 
-INSERT INTO faktura (nr_faktury, kwota, waluta, przelicznik_waluty, rabat, sposob_zaplaty, czy_zaplacono)
-VALUES ('F123456789', 10000.00, 'PLN', 1.0, 10, 'Przelew', TRUE);
 
--- Sprawdzenie, czy rabat został zastosowany
-SELECT * FROM faktura WHERE nr_faktury = 'F123456789';
+-----------------------TRIGGER 2 - PRZYKŁAD -----zablokowanie wstawienia rekordu -----------------------------------------------
 
---Po wstawieniu powyższego rekordu, trigger automatycznie zmniejszy kwotę o 10%, 
---więc w tabeli faktura powinna być zapisana kwota 9000.00 PLN.
-
------------------------------------------------------zablokowanie wstawienia rekordu -----------------------------------------------
-
---Przykładowe wywołanie dla tabeli kartoteka_transakcji:
 
 --Wstawienie nowej transakcji, które uruchomi trigger before_insert_kartoteka_transakcji. 
 --Zakładamy, że mamy samochód o id_samochod = 1, który nie jest gotowy do sprzedaży:
@@ -51,4 +50,5 @@ SELECT * FROM kartoteka_transakcji WHERE id_samochod = 1;
 
 --Po ustawieniu statusu samochodu na gotowy do sprzedaży, 
 --trigger pozwoli na wstawienie nowego rekordu transakcji do tabeli kartoteka_transakcji.
+
 

@@ -84,18 +84,18 @@ VALUES
 ('Zofia', 'Kozłowska', '234-567-890', 'zofia.kozlowska@example.com', 1, 3);
 
 ---------------------------------FAKTURA INSERTY---------------------------------------------ok
-INSERT INTO faktura (nr_faktury, kwota, waluta, przelicznik_waluty, rabat, sposob_zaplaty, czy_zaplacono) 
+INSERT INTO faktura (nr_faktury, rabat, sposob_zaplaty, czy_zaplacono) 
 VALUES 
-('F/2024/001', 1500.00, 'PLN',1.000, 5, 'Przelew', true),
-('F/2024/002', 2500.00, 'EUR',4.550, null, 'Gotówka', true),
-('F/2024/003', 1800.00, 'USD',3.755, 10, 'Karta kredytowa', true),
-('F/2024/004', 3200.00, 'PLN',1.000,7, 'Przelew', false),
-('F/2024/005', 5000.00, 'GBP',4.012, 4, 'Gotówka', true),
-('F/2024/006', 4200.00, 'PLN',1.000, null, 'Przelew', false),
-('F/2024/007', 3500.00, 'EUR',4.550, 9, 'Przelew', true),
-('F/2024/008', 2800.00, 'USD',3.755,3, 'Karta kredytowa', true),
-('F/2024/009', 1900.00, 'PLN',1.000,4, 'Przelew', true),
-('F/2024/010', 4000.00, 'PLN',1.000,7, 'Gotówka', true);
+('F/2024/001', 5, 'Przelew', true),
+('F/2024/002', null, 'Gotówka', true),
+('F/2024/003', 10, 'Karta kredytowa', true),
+('F/2024/004', 5,'Przelew', false),
+('F/2024/005', 4, 'Gotówka', true),
+('F/2024/006', null, 'Przelew', false),
+('F/2024/007', 9, 'Przelew', true),
+('F/2024/008', 3, 'Karta kredytowa', true),
+('F/2024/009', 4, 'Przelew', true),
+('F/2024/010', 7, 'Gotówka', true);
 
 ---------------------------------KLIENT INSERTY---------------------------------------------ok
 
@@ -118,22 +118,22 @@ VALUES
 -- Sprzedaż na placu 1 przez sprzedawcę 1
 INSERT INTO kartoteka_transakcji (rodzaj, data_transakcji, samochod_w_rozliczeniu, uwagi, id_samochod, id_klient, id_sprzedawca, id_plac, id_faktura)
 VALUES 
-('sprzedaż', '2024-01-10', false, 'Dodać opony ziomowe', 1, 7, 1, 1, 1);
+('sprzedaż', '2023-01-10', false, 'Dodać opony ziomowe', 1, 7, 1, 1, 1);
 
 -- Sprzedaż na placu 1 przez sprzedawcę 2
 INSERT INTO kartoteka_transakcji (rodzaj, data_transakcji, samochod_w_rozliczeniu, uwagi, id_samochod, id_klient, id_sprzedawca, id_plac, id_faktura)
 VALUES 
-('sprzedaż', '2024-01-15', true, 'Samochód kupiony z rabatem', 2, 10, 9, 1, 2);
+('sprzedaż', '2023-01-15', true, 'Samochód kupiony z rabatem', 2, 10, 9, 1, 1);
 
 -- Sprzedaż na placu 1 przez sprzedawcę 3
 INSERT INTO kartoteka_transakcji (rodzaj, data_transakcji, samochod_w_rozliczeniu, uwagi, id_samochod, id_klient, id_sprzedawca, id_plac, id_faktura)
 VALUES 
-('sprzedaż', '2024-02-05', false, 'Polerka przed wydaniem', 3, 3, 3, 1, 3);
+('sprzedaż', '2023-02-05', false, 'Polerka przed wydaniem', 3, 3, 3, 1, 2);
 
 -- Kupno na placu 2 przez sprzedawcę 4
 INSERT INTO kartoteka_transakcji (rodzaj, data_transakcji, samochod_w_rozliczeniu, uwagi, id_samochod, id_klient, id_sprzedawca, id_plac, id_faktura)
 VALUES 
-('kupno', '2024-02-20', false, 'Samochód kupiony z rabatem', 4, 6, 4, 2, 4);
+('kupno', '2024-02-20', false, 'Samochód kupiony z rabatem', 4, 6, 4, 2, 2);
 
 -- Sprzedaż na placu 2 przez sprzedawcę 5
 INSERT INTO kartoteka_transakcji (rodzaj, data_transakcji, samochod_w_rozliczeniu, uwagi, id_samochod, id_klient, id_sprzedawca, id_plac, id_faktura)
@@ -163,4 +163,4 @@ VALUES
 -- Kupno na placu 1 przez sprzedawcę 10
 INSERT INTO kartoteka_transakcji (rodzaj, data_transakcji, samochod_w_rozliczeniu, uwagi, id_samochod, id_klient, id_sprzedawca, id_plac, id_faktura)
 VALUES 
-('kupno', '2024-05-01', true, 'Samochód w rozliczeniu', 10, 1, 10, 1, 10);
+('kupno', '2024-05-01', true, 'Samochód w rozliczeniu', 10, 1, 10, 1, 9);
