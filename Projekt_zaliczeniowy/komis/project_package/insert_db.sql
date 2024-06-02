@@ -18,23 +18,23 @@ VALUES ('Polska', 'Poznań', 'Święty Marcin', '8', 1);
 -------------------------------------------------SAMOCHODY INSERTY ----------------------------------------ok
 
 -- Samochody rozmieszczone na 3 placach
-INSERT INTO samochod (nr_rejestracyjny, nr_vin, marka, model, rocznik, przebieg, silnik, paliwo, moc, kolor, rodzaj_pojazdu, ladownosc, gotowy_do_sprzedaży, cena, opis, id_plac)
+INSERT INTO samochod (nr_rejestracyjny, nr_vin, marka, model, rocznik, przebieg, silnik, paliwo, moc, kolor, rodzaj_pojazdu, ladownosc, gotowy_do_sprzedaży, cena, opis)
 VALUES 
-('ABC1234', '1HGCM82633A123456', 'Toyota', 'Corolla', 2015, 80000, 1.8, 'Benzyna', 140, 'Czarny', 'Sedan', 5.0, true, 15000.00, 'Polski salon', 1),
-('DEF5678', '2HGCM82633A654321', 'Honda', 'Civic', 2018, 60000, 2.0, 'Benzyna', 158, 'Biały', 'Sedan', 4.5, false, 145999.00, 'Dodatkowy komplet opon', 2),
-('GHI9101', '3HGCM82633A987654', 'Ford', 'Focus', 2020, 30000, 1.5, 'Diesel', 120, 'Niebieski', 'Hatchback', 4.0, true, 65000.00, 'Brak drugiego kluczyka', 1),
-('POL2345', '4HGCM82633A456789', 'Volkswagen', 'Golf', 2016, 90000, 1.6, 'Benzyna', 110, 'Srebrny', 'Hatchback', 4.3, false, 90500.00, null, 3),
-('MNO6789', '5HGCM82633A112233', 'BMW', '3 Series 4x4', 2017, 70000, 2.0, 'Diesel', 190, 'Czerwony', 'Sedan', 4.8, true, 25000.00, null, 2),
-('PQR1122', '6HGCM82633A332211', 'Audi', 'A4', 2019, 50000, 2.0, 'Benzyna', 200, 'Czarny', 'Sedan', 4.7, false, 25000.00,'Dodatkowy komplet opon', 3),
-('STU3344', '7HGCM82633A223344', 'Mercedes', 'C-Class', 2018, 65000, 2.0, 'Diesel', 180, 'Biały', 'Sedan', 4.6, true, 12000.00, null, 1),
-('VWX5566', '8HGCM82633A445566', 'Skoda', 'Octavia', 2021, 20000, 1.4, 'Benzyna', 150, 'Zielony', 'Hatchback', 4.2, false,15000.00, 'Dodatkowo CB radio', 2),
-('YZA7788', '9HGCM82633A667788', 'Volvo', 'S60 4x4', 2016, 85000, 2.0, 'Diesel', 190, 'Srebrny', 'Sedan', 4.9, true,10000.00, null, 3),
-('POD9900', '0HGCM82633A889900', 'Mazda', '6 4x4', 2017, 75000, 2.2, 'Diesel', 175, 'Niebieski', 'Sedan', 4.5, false,115000.00, null, 1),
-('EFG1235', '1HGCM82633B112233', 'Opel', 'Astra', 2020, 25000, 1.6, 'Benzyna', 130, 'Czerwony', 'Hatchback', 4.1, true,17000.00, null, 2),
-('HIJ4567', '2HGCM82633B445566', 'Renault', 'Megane', 2019, 40000, 1.5, 'Diesel', 115, 'Biały', 'Hatchback', 4.0, false,20000.00, null, 3),
-('KLM7890', '3HGCM82633B778899', 'Peugeot', '308', 2018, 55000, 1.2, 'Benzyna', 130, 'Czarny', 'Hatchback', 4.2, true,15000.00, 'Brak drugiego kluczyka', 1),
-('POP1123', '4HGCM82633C112233', 'Hyundai', 'Elantra', 2021, 15000, 1.8, 'Benzyna', 147, 'Srebrny', 'Sedan', 4.5, false,45000.00, 'Dodatkowy komplet opon', 2),
-('QRC4456', '5HGCM82633C445566', 'Kia', 'Ceed', 2017, 70000, 1.6, 'Diesel', 136, 'Niebieski', 'Hatchback', 4.3, true,70000.00, 'Polski salon', 3);
+('ABC1234', '1HGCM82633A123456', 'Toyota', 'Corolla', 2015, 80000, 1.8, 'Benzyna', 140, 'Czarny', 'Sedan', 5.0, true, 15000.00, 'Polski salon'),
+('DEF5678', '2HGCM82633A654321', 'Honda', 'Civic', 2018, 60000, 2.0, 'Benzyna', 158, 'Biały', 'Sedan', 4.5, false, 145999.00, 'Dodatkowy komplet opon'),
+('GHI9101', '3HGCM82633A987654', 'Ford', 'Focus', 2020, 30000, 1.5, 'Diesel', 120, 'Niebieski', 'Hatchback', 4.0, true, 65000.00, 'Brak drugiego kluczyka'),
+('POL2345', '4HGCM82633A456789', 'Volkswagen', 'Golf', 2016, 90000, 1.6, 'Benzyna', 110, 'Srebrny', 'Hatchback', 4.3, false, 90500.00, null),
+('MNO6789', '5HGCM82633A112233', 'BMW', '3 Series 4x4', 2017, 70000, 2.0, 'Diesel', 190, 'Czerwony', 'Sedan', 4.8, true, 25000.00, null),
+('PQR1122', '6HGCM82633A332211', 'Audi', 'A4', 2019, 50000, 2.0, 'Benzyna', 200, 'Czarny', 'Sedan', 4.7, false, 25000.00,'Dodatkowy komplet opon'),
+('STU3344', '7HGCM82633A223344', 'Mercedes', 'C-Class', 2018, 65000, 2.0, 'Diesel', 180, 'Biały', 'Sedan', 4.6, true, 12000.00, null),
+('VWX5566', '8HGCM82633A445566', 'Skoda', 'Octavia', 2021, 20000, 1.4, 'Benzyna', 150, 'Zielony', 'Hatchback', 4.2, false,15000.00, 'Dodatkowo CB radio'),
+('YZA7788', '9HGCM82633A667788', 'Volvo', 'S60 4x4', 2016, 85000, 2.0, 'Diesel', 190, 'Srebrny', 'Sedan', 4.9, true,10000.00, null),
+('POD9900', '0HGCM82633A889900', 'Mazda', '6 4x4', 2017, 75000, 2.2, 'Diesel', 175, 'Niebieski', 'Sedan', 4.5, false,115000.00, null),
+('EFG1235', '1HGCM82633B112233', 'Opel', 'Astra', 2020, 25000, 1.6, 'Benzyna', 130, 'Czerwony', 'Hatchback', 4.1, true,17000.00, null),
+('HIJ4567', '2HGCM82633B445566', 'Renault', 'Megane', 2019, 40000, 1.5, 'Diesel', 115, 'Biały', 'Hatchback', 4.0, false,20000.00, null),
+('KLM7890', '3HGCM82633B778899', 'Peugeot', '308', 2018, 55000, 1.2, 'Benzyna', 130, 'Czarny', 'Hatchback', 4.2, true,15000.00, 'Brak drugiego kluczyka'),
+('POP1123', '4HGCM82633C112233', 'Hyundai', 'Elantra', 2021, 15000, 1.8, 'Benzyna', 147, 'Srebrny', 'Sedan', 4.5, false,45000.00, 'Dodatkowy komplet opon'),
+('QRC4456', '5HGCM82633C445566', 'Kia', 'Ceed', 2017, 70000, 1.6, 'Diesel', 136, 'Niebieski', 'Hatchback', 4.3, true,70000.00, 'Polski salon');
 
 --------------------------------------------DOSTAWA INSERTY---------------------------------------ok
 INSERT INTO dostawa (data_dostawy, kraj_pochodzenia, czy_zarejestrowany, czy_uszkodzony, id_plac, id_samochod)

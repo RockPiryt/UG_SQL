@@ -161,7 +161,4 @@ DELETE FROM sprzedawca WHERE id_sprzedawca = 12;
 
 
 
---------------WYMAGANIE-------------- Użycie zagnieżdżenia w obu odmianach, nieskorelowane i skorelowane.
---Wyświetlić samochodu na placu nr 1 które maja diesla
-
 

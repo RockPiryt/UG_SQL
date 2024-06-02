@@ -25,7 +25,7 @@ CREATE TABLE plac
     nr_działki              varchar(20)     not null,
     id_komis                int,
     -- klucz obcy - powiazanie placu z komisem
-    CONSTRAINT              fk_komis FOREIGN KEY(id_komis)
+    CONSTRAINT              fk_komis_plac FOREIGN KEY(id_komis)
                             REFERENCES komis(id_komis)
                             ON UPDATE CASCADE ON DELETE CASCADE
 );
@@ -48,11 +48,6 @@ CREATE TABLE samochod
     gotowy_do_sprzedaży     bool            not null,
     cena                    decimal(20,2)   not null,
     opis                    text,
-    id_plac                 int,
-    -- klucz obcy - powiazanie samocodu z placem
-    CONSTRAINT              fk_plac FOREIGN KEY(id_plac)
-                            REFERENCES plac(id_plac)
-                            ON UPDATE CASCADE ON DELETE CASCADE,
     UNIQUE(nr_rejestracyjny, nr_vin)
 );
 
@@ -67,11 +62,11 @@ CREATE TABLE dostawa
     id_plac               int,
     id_samochod           int,
     -- klucz obcy - powiazanie dostawy z samochodem
-    CONSTRAINT              fk_samochod FOREIGN KEY(id_samochod)
+    CONSTRAINT              fk_samochod_dostawa FOREIGN KEY(id_samochod)
                             REFERENCES samochod(id_samochod)
                             ON UPDATE CASCADE ON DELETE CASCADE,
     -- klucz obcy - powiazanie dostawy z placem
-    CONSTRAINT              fk_plac FOREIGN KEY(id_plac)
+    CONSTRAINT              fk_plac_dostawa FOREIGN KEY(id_plac)
                             REFERENCES plac(id_plac)
                             ON UPDATE CASCADE ON DELETE CASCADE
 );
@@ -87,11 +82,11 @@ CREATE TABLE sprzedawca
     id_komis                int,
     id_plac                 int,
     -- klucz obcy - powiazanie sprzedawcy z komisem
-    CONSTRAINT              fk_komis FOREIGN KEY(id_komis)
+    CONSTRAINT              fk_komis_sprzedawca FOREIGN KEY(id_komis)
                             REFERENCES komis(id_komis)
                             ON UPDATE CASCADE ON DELETE CASCADE,
     -- klucz obcy - powiazanie sprzedawcy z placem(są 3 place)
-    CONSTRAINT              fk_plac FOREIGN KEY(id_plac)
+    CONSTRAINT              fk_plac_sprzedawca FOREIGN KEY(id_plac)
                             REFERENCES plac(id_plac)
                             ON UPDATE CASCADE ON DELETE CASCADE
 );
@@ -137,23 +132,23 @@ CREATE TABLE kartoteka_transakcji
     id_plac					int,
     id_faktura              int,
     -- klucz obcy - powiazanie transakcji z zakupionym/sprzedanym samochodem
-    CONSTRAINT              fk_samochod FOREIGN KEY(id_samochod)
+    CONSTRAINT              fk_samochod_transakcja FOREIGN KEY(id_samochod)
                             REFERENCES samochod(id_samochod)
                             ON UPDATE CASCADE ON DELETE CASCADE,
     -- klucz obcy - powiazanie transakcji z klientem
-    CONSTRAINT              fk_klient FOREIGN KEY(id_klient)
+    CONSTRAINT              fk_klient_transakcja FOREIGN KEY(id_klient)
                             REFERENCES klient(id_klient)
                             ON UPDATE CASCADE ON DELETE CASCADE,
     -- klucz obcy - powiazanie transakcji z placem
-    CONSTRAINT              fk_plac FOREIGN KEY(id_plac)
+    CONSTRAINT              fk_plac_transakcja FOREIGN KEY(id_plac)
                             REFERENCES plac(id_plac)
                             ON UPDATE CASCADE ON DELETE CASCADE,
     -- klucz obcy - powiazanie transakcji ze sprzedajacym
-    CONSTRAINT              fk_sprzedawca FOREIGN KEY(id_sprzedawca)
+    CONSTRAINT              fk_sprzedawca_transakcja FOREIGN KEY(id_sprzedawca)
                             REFERENCES sprzedawca(id_sprzedawca)
                             ON UPDATE CASCADE ON DELETE CASCADE,
     -- klucz obcy - powiazanie transakcji z faktura
-    CONSTRAINT              fk_faktura FOREIGN KEY(id_faktura)
+    CONSTRAINT              fk_faktura_transakcja FOREIGN KEY(id_faktura)
                             REFERENCES faktura(id_faktura)
                             ON UPDATE CASCADE ON DELETE CASCADE
     

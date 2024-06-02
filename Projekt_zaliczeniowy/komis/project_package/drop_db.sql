@@ -1,3 +1,4 @@
+DROP TABLE historia_cen;
 DROP TABLE kartoteka_transakcji;
 DROP TABLE klient;
 DROP TABLE faktura;
