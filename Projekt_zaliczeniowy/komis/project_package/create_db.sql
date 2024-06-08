@@ -106,7 +106,7 @@ CREATE TABLE klient
     id_klient               serial               PRIMARY KEY,
     imie                    varchar(30)          not null,
     nazwisko                varchar(30)          not null,
-    pesel_nip               varchar(11)          not null,
+    pesel                   varchar(11)          not null,
     rodzaj_dokumentu        varchar(50)          not null,
     nr_dokumentu            varchar(30)          not null,
     panstwo                 varchar(30),
@@ -116,7 +116,7 @@ CREATE TABLE klient
     nr_mieszkania           varchar(10),
     kod                     varchar(10),
     telefon                 varchar(30),
-    UNIQUE(pesel_nip)
+    UNIQUE(pesel)
 );
 -----------------------------------------------------------------------
 CREATE TABLE kartoteka_transakcji

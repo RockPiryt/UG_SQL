@@ -99,17 +99,17 @@ VALUES
 
 ---------------------------------KLIENT INSERTY---------------------------------------------ok
 
-INSERT INTO klient (imie, nazwisko, pesel_nip, rodzaj_dokumentu, nr_dokumentu, panstwo, miasto, ulica, nr_domu, nr_mieszkania, kod, telefon)
+INSERT INTO klient (imie, nazwisko, pesel, rodzaj_dokumentu, nr_dokumentu, panstwo, miasto, ulica, nr_domu, nr_mieszkania, kod, telefon)
 VALUES 
 ('Jan', 'Kowalski', '12345678901', 'Dowód osobisty', 'ABC123456', 'Polska', 'Warszawa', 'Krakowska', 10, 2, '00-001', '123456789'),
-('Anna', 'Nowak', '9876543210', 'Dowód osobisty', 'DEF987654', 'Polska', 'Kraków', 'Piotrkowska', 5, NULL, '30-002', '987654321'),
-('Piotr', 'Wiśniewski', '3456789010', 'Paszport', 'GHI654321', 'Polska', 'Gdańsk', 'Słoneczna', 15, 4, '80-003', '654321987'),
-('Maria', 'Dąbrowska', '6789012340', 'Dowód osobisty', 'JKL321654', 'Polska', 'Poznań', 'Leszczyńska', 20, NULL, '60-004', '456789012'),
-('Adam', 'Lis', '0123456789', 'Paszport', 'MNO987654', 'Polska', 'Łódź', 'Wschodnia', 30, 7, '90-005', '789012345'),
+('Anna', 'Nowak', '98765432101', 'Dowód osobisty', 'DEF987654', 'Polska', 'Kraków', 'Piotrkowska', 5, NULL, '30-002', '987654321'),
+('Piotr', 'Wiśniewski', '34567890101', 'Paszport', 'GHI654321', 'Polska', 'Gdańsk', 'Słoneczna', 15, 4, '80-003', '654321987'),
+('Maria', 'Dąbrowska', '67890123402', 'Dowód osobisty', 'JKL321654', 'Polska', 'Poznań', 'Leszczyńska', 20, NULL, '60-004', '456789012'),
+('Adam', 'Lis', '01234567891', 'Paszport', 'MNO987654', 'Polska', 'Łódź', 'Wschodnia', 30, 7, '90-005', '789012345'),
 ('Ewa', 'Kamińska', '11223344556', 'Dowód osobisty', 'PQR456789', 'Polska', 'Wrocław', 'Polna', 25, 1, '50-006', '321654987'),
 ('Tomasz', 'Zieliński', '12345678909', 'Paszport', 'STU654321', 'Polska', 'Szczecin', 'Rybacka', 8, NULL, '70-007', '654987321'),
 ('Magdalena', 'Woźniak', '21314151617', 'Dowód osobisty', 'VWX123456', 'Polska', 'Katowice', 'Ogrodowa', 12, NULL, '40-008', '987321654'),
-('Katarzyna', 'Jaworska', '5678901234', 'Dowód osobisty', 'YZA987654', 'Polska', 'Gdynia', 'Moraska', 18, 3, '20-009', '741852963'),
+('Katarzyna', 'Jaworska', '56789012342', 'Dowód osobisty', 'YZA987654', 'Polska', 'Gdynia', 'Moraska', 18, 3, '20-009', '741852963'),
 ('Grzegorz', 'Kaczmarek', '67890123456', 'Dowód osobisty', 'BCD654321', 'Polska', 'Kraków', 'Długa', 7, NULL, '30-010', '852963741');
 
 
