@@ -7,7 +7,7 @@
     • Zapytania negatywne, np. klienci bez złożonych zamówień. Co najmniej w dwu wersjach.*/
 
 
---------------WYMAGANIE-------------- Użycie zagnieżdżenia w obu odmianach, nieskorelowane i skorelowane 
+--------------WYMAGANIE-------------- Użycie zagnieżdżenia w obu odmianach, nieskorelowane 
 -- Pokaż wszystkie samochody, które pochodzą z Polski
 SELECT 
     dos.kraj_pochodzenia,
@@ -16,6 +16,22 @@ FROM samochod as s
 JOIN dostawa as dos ON dos.id_samochod=s.id_samochod
 WHERE s.id_samochod IN (SELECT d.id_samochod FROM dostawa AS d WHERE kraj_pochodzenia = 'Polska')
 
+
+-- zagnieżdżona tabela użyta w warunku służy jako zbiór – możemy najpierw wykonać wewnętrzne zapytanie, a potem
+-- z tabeli zewnętrznej – brak korelacji
+
+--------------WYMAGANIE-------------- Użycie zagnieżdżenia w obu odmianach, skorelowane 
+-- Pokaż klientow, którzy dokonali transakcji na placu nr 1
+SELECT 
+    kl.imie,
+    kl.nazwisko
+FROM klient AS kl
+WHERE EXISTS (
+    SELECT 1 
+    FROM kartoteka_transakcji AS kt
+    WHERE kt.id_klient = kl.id_klient
+    AND kt.id_plac = 1
+);
 --------------WYMAGANIE-------------- Warunki odwołujące się do wzorców napisów (np. opisy wszystkich układanek, LIKE 'układanka%')
 -- wyświetl samochody zarejestrowane w Poznania
 SELECT * FROM samochod WHERE nr_rejestracyjny LIKE'PO%';
@@ -26,6 +42,16 @@ SELECT
     s.model,
     s.rocznik
 FROM samochod AS s WHERE model LIKE '%4x4%';
+
+--------------WYMAGANIE-------------- Obecność złączenia bez składni INNER JOIN
+-- Wyświetl wszystkie samochody wraz z informacją o rodzaju transakcji (sprzedaż/kupno) i dacie transakcji
+SELECT 
+    s.marka,
+	s.model,
+	kt.rodzaj,
+	kt.data_transakcji
+FROM samochod AS s, kartoteka_transakcji AS kt WHERE s.id_samochod=kt.id_samochod
+
 
 --------------WYMAGANIE---------------INNER JOIN+grupowanie+funkcja aggregująca count 
 -- Pokaż informacje o sprzedawcach, którzy sprzedali najwięcej samochodów
